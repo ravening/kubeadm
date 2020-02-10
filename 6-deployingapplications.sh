@@ -38,6 +38,9 @@ hostname
 ip addr
 exit
 
+# Expose the service to the outside world using
+kubectl port-forward --address 0.0.0.0 deployment/hello-world 6666:6666
+
 #Remember that first kubectl run we executed, it created a Deployment for us.
 #Let's look more closely at the deployment
 #Deployments are made of ReplicaSets!
