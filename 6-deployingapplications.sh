@@ -26,6 +26,8 @@ sudo docker ps
 
 exit
 
+
+
 #Back on the Master, we can pull the logs from the container. Which is going to be anything written to stdout. 
 #Maybe something went wrong inside our app, and our pod won't start. This is useful for troubleshooting.
 kubectl logs hello-world-pod
@@ -40,6 +42,11 @@ exit
 
 # Expose the service to the outside world using
 kubectl port-forward --address 0.0.0.0 deployment/hello-world 6666:6666
+
+# Create a node port using
+
+kubectl expose deployment hello-world --port=6666 --type=NodePort
+kubectl patch svc hello-world -p '{"spec":{"externalIPs":["PUBLIC IP"]}}'
 
 #Remember that first kubectl run we executed, it created a Deployment for us.
 #Let's look more closely at the deployment
