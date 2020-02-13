@@ -8,7 +8,7 @@ kubectl run hello-world --image=gcr.io/google-samples/hello-app:1.0
 kubectl run hello-world-pod --image=gcr.io/google-samples/hello-app:1.0 --generator=run-pod/v1
 
 # to deploy our own app run
- kubectl run hello-world --image=docker.io/rakgenius/helloworld:latest
+ kubectl run quarkus-greetings --image=docker.io/rakgenius/quarkus-greetings:latest
 
 #Let's follow our pod and deployment status
 kubectl get pods
@@ -17,7 +17,7 @@ kubectl get pods -o wide
 
 # on master
 
-curl <IP of the pod>:6666/hello
+curl <IP of the pod>:8080/greetings
 
 #Remember, k8s is a container orchestrator and it's starting up containers on Nodes.
 #Open a second terminal and ssh into the node that hello-world pod is running on.
@@ -41,17 +41,17 @@ ip addr
 exit
 
 # Expose the service to the outside world using
-kubectl port-forward --address 0.0.0.0 deployment/hello-world 6666:6666
+kubectl port-forward --address 0.0.0.0 deployment/quarkus-greetings 8080:8080
 
 # Create a node port using
 
-kubectl expose deployment hello-world --port=6666 --type=NodePort
-kubectl patch svc hello-world -p '{"spec":{"externalIPs":["PUBLIC IP"]}}'
+kubectl expose deployment quarkus-greetings --port=8080 --type=NodePort
+kubectl patch svc quarkus-greetings -p '{"spec":{"externalIPs":["PUBLIC IP"]}}'
 
 #Remember that first kubectl run we executed, it created a Deployment for us.
 #Let's look more closely at the deployment
 #Deployments are made of ReplicaSets!
-kubectl get deployment hello-world
+kubectl get deployment quarkus-greetings
 kubectl get replicaset
 kubectl get pods
 
@@ -59,7 +59,7 @@ kubectl get pods
 #Walk through the pods Events...
 #Name, Containers, Ports, Conditions, and Events. 
 #Deployments are made of ReplicaSets!
-kubectl describe deployment hello-world | more
+kubectl describe deployment quarkus-greetings | more
 
 #Let's see what describe can tell us about a deployed Pod.
 #Check out the Name, Node, Status, Containers, and events.
@@ -71,7 +71,7 @@ kubectl describe pods $PASTEPODNAMEHERE | more
 #We are exposing our serivce on port 80, connecting to an application running on 8080 in our pod.
 #Port: Interal Cluster Port, the Service's port. You will point cluster resources here.
 #TargetPort: The Pod's Serivce Port, your application. That one we defined when we started the pods.
-kubectl expose deployment hello-world --port=80 --target-port=8080
+kubectl expose deployment quarkus-greetings --port=80 --target-port=8080
 
 #Check out the IP: and Port:, that's where we'll access this service.
 kubectl get service hello-world
@@ -83,7 +83,7 @@ kubectl describe service hello-world
 curl http://$SERVCIEIP:$PORT
 
 #Access the pod's application directly, useful for troubleshooting.
-kubectl get endpoints hello-world
+kubectl get endpoints quarkus-greetings
 curl http://$ENDPOINT:$TARGETORT
 
 #Using kubectl to generate yaml or json files of our imperitive configuration.
