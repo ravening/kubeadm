@@ -1,3 +1,8 @@
+# Run the kube proxy server on the master to allow connections from remote machines so that we can invoke api's
+# Below command will start proxy server on port 2020 and accept connections from outside world
+# you can test it using $ curl <PUBLIC IP of MASTER>:2020
+nohup kubectl proxy --port=2020 --accept-hosts='.*' --address 0.0.0.0 &
+
 #Listing and Inspecting your cluster, pods, services and more.
 kubectl cluster-info
 
