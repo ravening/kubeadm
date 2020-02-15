@@ -8,10 +8,10 @@ kubectl get deploy -n kubernetes-dashboard
 
 kubectl edit deploy kubernetes-dashboard -n kubernetes-dashboard
 
-```
+
 hostNetwork: true
 dnsPolicy: Default
-```
+
 
 # Now you can access dashboard using below link provided that kube proxy is runnin on port 8001
 
