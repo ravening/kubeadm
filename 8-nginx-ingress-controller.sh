@@ -20,6 +20,8 @@ Creating API client for https://10.96.0.1:443
 # If so then nginx ingress controller pod is not running or can't connect to api server.
 # In that case you need to change the below line in the deployment of nginx ingress controller
 
+kubectl -n ingress-nginx edit deploy nginx-ingress-controller
+
 dnsPolicy: Default
 hostNetwork: true
 
