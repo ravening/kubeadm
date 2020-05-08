@@ -2,6 +2,8 @@
 
 Step by step instruction to setup a single master and 2 nodes kubernetes cluster
 
+Another good tutorial is in https://medium.com/better-programming/kubernetes-from-scratch-4691283e3995
+
 ## Getting Started
 
 The files are number from 0 through 8 which obviously tells that you need to start\
