@@ -1,6 +1,10 @@
 # This file mentions the steps required to create a dahboard in kubernetes
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta8/aio/deploy/recommended.yaml
 
+or latest one
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
+
 # This will create deployment and dashboard pod also but the container might crash since it cant access the cluster ip
 # and you might get timeout error. To fix that you need to add below contents to the dashboard deployment
 
