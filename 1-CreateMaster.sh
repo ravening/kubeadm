@@ -7,7 +7,7 @@ wget https://docs.projectcalico.org/v3.10/manifests/calico.yaml
 vi calico.yaml
 
 #Create our kubernetes cluster, specifying a pod network range matching that in calico.yaml!
-sudo kubeadm init --pod-network-cidr=192.168.0.0/16
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<Ip address of master>
 
 #Configure our account on the master to have admin access to the API server from a non-privileged account.
 mkdir -p $HOME/.kube
