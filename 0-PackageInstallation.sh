@@ -11,7 +11,14 @@
 swapoff -a
 vi /etc/fstab
 
+# Optionall update the hostname
+vi /etc/hostname
+
+# Install openssh server
+apt-get install openssh-server
+
 #Add Google's apt repository gpg key
+apt-get install apt-transport-https curl httpie -y
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 
 #Add the Kubernetes apt repository
@@ -27,6 +34,12 @@ apt-cache policy docker.io | head -n 20
 #Install the required packages, if needed we can request a specific version
 sudo apt-get install -y docker.io kubelet kubeadm kubectl
 sudo apt-mark hold docker.io kubelet kubeadm kubectl
+
+#Add the below line to the file
+cat /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+
+Environment="cgroup-driver=systemd/cgroup-driver=cgroupfs"
+
 
 #Check the status of our kubelet and our container runtime, docker.
 #The kubelet will enter a crashloop until it's joined. 
