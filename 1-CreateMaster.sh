@@ -14,6 +14,23 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
+# Sometime the liveness and readiness probes of calico fails. In that case
+# remove the readiness and liveness probes from calico.yaml
+
+# Also if the network interface card is different than the default, the network
+# wont come up. In that case you need to change the setting in calico.yaml
+# Add the the below two lines
+
+- name: IP_AUTODETECTION_METHOD
+  value: "interface=eth.*"
+
+# after the section
+
+# Auto-detect the BGP IP address.
+- name: IP
+  value: "autodetect"
+  
+  
 #Download yaml files for your pod network
 kubectl apply -f rbac-kdd.yaml
 kubectl apply -f calico.yaml
