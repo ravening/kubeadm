@@ -1,6 +1,10 @@
 # Below are the steps needed to setup ingress controller but you can also refer to guid mentioned in
 https://medium.com/better-programming/how-to-expose-your-services-with-kubernetes-ingress-7f34eb6c9b5a
 
+
+New version of nginx ingress controller is in 10-new-nginx-ingress-controller.sh
+
+
 # This file explains about setting up nginx ingress controller to router traffic from outside world to the pods/services
 # The steps mentioned below are only applicable for bare metal setup. So run the below commands only if you are
 # running bare metal servers else refer to different components in the wiki
