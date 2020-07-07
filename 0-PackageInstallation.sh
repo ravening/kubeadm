@@ -6,6 +6,9 @@
 #   5. Take snapshots prior to installations, this way you can install 
 #       and revert to snapshot if needed
 
+https://medium.com/better-programming/kubernetes-from-scratch-4691283e3995
+
+
 #Disable swap, swapoff then edit your fstab removing any entry for swap partitions
 #You can recover the space with fdisk. You may want to reboot to ensure your config is ok. 
 swapoff -a
