@@ -5,6 +5,45 @@
 # cluster role with cluster-admin permission.
 # Then pass the serviceaccount name to the deployment of the pod
 
+# Below are the yaml files for "default" namespace. For other namespaces please scroll down
+
+# service account will already be created for "default" namespace. So proceed with remainin steps
+
+# create role
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: default
+  name: default
+rules:
+- apiGroups: [""]
+  resources: ["deployments", "pods", "configmaps", "services", "endpoints"]
+  verbs: ["get", "update", "patch", "create", "list"]
+
+
+# create rolebinding
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: default-role-binding
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: default
+roleRef:
+  kind: Role
+  name: default
+  apiGroup: rbac.authorization.k8s.io
+
+
+# create cluster role
+
+kubectl create clusterrolebinding default --clusterrole=cluster-admin --serviceaccount=default:default
+
+
+
+For other namespaces
 
 # Create service account
 apiVersion: v1
